@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Character Encoding</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+                <section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+					<h1>Character Encoding</h1>
+					<h3>Zeichenkodierung</h3>
+					<p>
+                        <small>Presented by Yan Wang</small>
+					</p>
+				</section>
+
+				<section data-transition="slide" data-background="#5d7e65" data-background-transition="zoom">
+					<h2>Gliederung</h2>
+					<ol>
+						<li>Zweck</li>
+						<li>Funktionsweise</li>
+                        <li>Arten der Zeichenkodierung</li>
+						<li>Möglichkeiten zur Festlegung der Zeichencodierung </li>
+					</ol>
+				</section>
+                <section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+					<section>
+						<h2>Zweck</h2>
+						<ul>
+                            <li>um Zeichen verschiedener Sprachen korrekt und lesbar darzustellen</li>
+                            <li>d.h. zur Darstellung von Zeichen, die nicht den elementaren Englischen Zeichen entsprechen</li>
+				        </ul>
+						<br><br>
+                        Beispiel<br>
+						<a href="#" class="navigate-down">
+							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
+						</a>
+					</section>
+					<section id="fragments">
+						<h2>Beispiel</h2>
+                        <p>Textdarstellung ohne korrekten Zeichenkodierung:</p>
+                        <p><img data-src="http://www.w3.org/International/questions/images/mojibake2.gif"></p>
+                        <p class="fragment">Textarstellung mit richtig eingestellten Zeichenkodierung: <img data-src="http://www.w3.org/International/questions/images/mojibake1.gif"></p>		
+                     </section>
+                </section>
+                <section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+					<h2>Funktionsweise</h2>
+					<ul>
+						<li>Wörter besteht aus Zeichen, Bsp.: a, á, 啊</li>
+						<li>zusammengefasst in einem Zeichensatz</li>
+                        <li>Zeichencode</li>
+                        <li>Byte</li>
+                        <li>Zeichenkodierung: Schlüssel für die Rückwandlung von Bytes in Zeichencodes</li>
+					</ul>
+				</section>
+                <section data-transition="slide" data-background="#4E789F" data-background-transition="zoom">
+					<section>
+						<h2>Arten der Zeichenkodierung</h2>
+						<ul>
+                            <li><b>ASCII</b></li>
+                            <li><em>ISO 8859-1</em></li>
+                            <li><b>UTF-16/UTF-8</b></li>
+                            <li>usw...</li>
+				        </ul>
+					</section>
+					<section>
+						<h2>ASCII</h2>
+                        <ul>
+                            <li>American Standard Code for Information Interchange</li>
+                            <li>nur elementare englische Zeichen</li>
+                            <li>7-Bit-Zeichenkodierung</li>
+                            <li>Grundlage für spätere Kodierungen</li>    
+				        </ul>
+                        <img data-src="./Bilder/ascii.jpg">
+                        
+                     </section>
+                    <section>
+						<h2>UTF-16</h2>
+                         <ul>
+                            <li>Kodierung mit variabler Länge für Unicode-Zeichen</li>
+                             <li>optimiert für häufig gebrauchten Zeichen</li>
+                             <li>Kodierung aller Zeichen in 2 Byte => doppelten Platzbedarf</li>
+				        </ul>
+                        
+                     </section>
+                    <section>
+						<h2>UTF-8</h2>
+                        <ul>
+                            <li>am weitesten verbreitete Kodierung für Unicode-Zeichen</li>
+                            <li>MBCS: bis zu 4 Bytes pro Zeichen möglich</li>
+                            <li>in den ersten 128 Zeichen deckungsgleich mit ASCII</li>
+                            <li>bis zu 3 Folgebytes</li>
+				        </ul><br><br>
+                        <table>
+						<thead>
+							<tr>
+								<th>Folgebytes</th>
+								<th>UTF-8-Kodierung (binär)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>0</td>
+								<td>0xxxxxxx</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>110xxxxx 10xxxxxx</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>1110xxxx 10xxxxxx 10xxxxxx</td>
+							</tr>
+                            <tr>
+								<td>3</td>
+								<td>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</td>
+							</tr>
+						</tbody>
+					</table>
+                     </section>
+                    
+                    </section>
+
+                <section data-transition="slide" data-background="#4C5460" data-background-transition="zoom">
+					<section>
+						<h2>Möglichkeiten zur Festlegung der Zeichencodierung</h2>
+                        <h3>BOM: Byte Order Mark</h3>
+						<ul>
+                            <li>Bytereihenfolge-Markierung</li>
+                            <li>an den Anfang einer Datei gesetzt</li>
+                            <li>gibt an, in welcher Reihenfolge die Bytes ausgewertet werden müssen</li>
+                            <li>höchste Priorität</li>
+				        </ul>
+					</section>
+					<section>
+						<h3>HTTP-Header</h3>
+                        <ul>
+                            <li>außerhalb der Datei definiert</li>
+                            <li>wird vom Server gesendet</li>
+                            <li>Vorteil: gilt für das ganze Dokument</li>
+                            <li>Nachteil: bei Änderung - Zugriff auf Server notwendig</li>
+                            <li>2. Priorität</li>
+				        </ul>
+                     </section>
+                    <section>
+						<h3>Meta-Header</h3>
+                        <ul>
+                            <li>innerhalb der HTML-Datei</li>
+                            <li>wirkungslos gegenüber BOM oder HTTP-Header</li>
+                            <li>Nachteil: wirkt erst nach einlesen der Meta-Zeile</li>
+				        </ul>
+                      <pre><code style="word-wrap: break-word;">&lt;!DOCTYPE html&gt;</code><code style="word-wrap: break-word;">&lt;html&gt;</code><code style="word-wrap: break-word;">&lt;head&gt;</code><code style="word-wrap: break-word;">&lt;meta charset="utf-8"/&gt;</code><code>...</code></pre>
+                     </section>
+                    
+                    </section>
+                
+                    <section data-transition="slide" data-background="#222222" data-background-transition="zoom">
+					<h2>Quelle</h2>
+					<ul>
+						<li>Wikipedia</li>
+						<li>Selfhtml</li>
+                        <li>https://webbausteine.de/tipps/schriftzeichen_richtig_darstellen.php</li>
+						<li>http://www.w3.org/International/questions/qa-what-is-encoding.de.php#answer</li>
+					</ul>
+				    </section>
+                    <section data-transition="slide" data-background="#222222" data-background-transition="zoom">
+					<h1>Ende</h1>
+					<h3>Vielen Dank für Eure Aufmerksamkeit!</h3>
+				    </section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
